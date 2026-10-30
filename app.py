@@ -40,6 +40,10 @@ for f in ordenes_files:
 with st.spinner("Analizando..."):
     ordenes = pd.concat(dfs, ignore_index=True)
 
+    # Omitir guías de la bodega WIILOG BUCARAMANGA
+    bodega_norm = ordenes["BODEGA"].astype(str).str.upper().str.split().str.join(" ")
+    ordenes = ordenes[bodega_norm != "WIILOG BUCARAMANGA"].copy()
+
     ordenes["GUIA_NORM"] = ordenes["NÚMERO GUIA"].astype(str).str.strip().str.lstrip("0")
     ordenes["EN_BD"] = ordenes["GUIA_NORM"].isin(all_dev)
     ordenes["RESULTADO"] = ordenes["EN_BD"].map({True: "OK", False: "SIN ARRIBO"})
