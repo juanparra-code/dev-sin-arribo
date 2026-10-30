@@ -123,7 +123,7 @@ def generar_excel():
         "VALOR": [len(ordenes), len(wiilog), len(otras), len(wiilog[wiilog["RESULTADO"]=="OK"]),
                   len(sin_arribo), f"${total_valor:,.0f}"]
     })
-    cols = ["MES","NÚMERO GUIA","ESTATUS","TRANSPORTADORA","BODEGA","NOMBRE CLIENTE",
+    cols = ["MES","ID","NÚMERO GUIA","ESTATUS","TRANSPORTADORA","BODEGA","NOMBRE CLIENTE",
             "DEPARTAMENTO DESTINO","CIUDAD DESTINO","VALOR DE COMPRA EN PRODUCTOS","FECHA","RESULTADO"]
     with pd.ExcelWriter(buf, engine="openpyxl") as w:
         resumen_general.to_excel(w, sheet_name="RESUMEN", index=False)
